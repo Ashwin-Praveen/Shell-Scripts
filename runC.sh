@@ -7,7 +7,9 @@ clear
 file=`ls -t *.c | head -n 1`
 #Svaing last used C file 
 
-echo "\n\nDo you want to \n1.Edit Your File\n2.Compile code\n3.Run Executable\n"
+clear
+
+echo "\n\nDo you want to \n1.Create A New File\n2.Edit Your File\n3.Compile Code\n4.Run Executable\n"
 echo "Choice: \c" > /dev/tty
 #\c to keep the cursor there
 
@@ -15,8 +17,15 @@ read choice
 #Reads input
 
 case $choice in
-	
-	2)	echo "Enter exe file name: \c" >  /dev/tty
+
+        1) 	echo "Enter Your File Name: \c"
+                read newfile
+                echo "\n"
+                nano $newfile.c                                  ;;
+
+
+
+	3)	echo "Enter Exe File Name: \c" >  /dev/tty
 		read bin
 		echo $bin > binsave 
 
@@ -25,12 +34,12 @@ case $choice in
 		echo " "
 		gcc "$file" -o $bin && echo "File compiled succesfully." ;;
 	
-	1)	nano $file ;;
+	2)	nano $file ;;
 
-	3)	./`cat binsave` || echo "\nPlease Compile your program." ;;
+	4)	./`cat binsave` || echo "\nPlease Compile Your Program." ;;
 #this reads the exe file stored in file and appends it with ./ to give proper output
 
-	*)	echo "Enter the one of the options mentioned above." ;; 
+	*)	echo "Enter one of the options mentioned above." ;; 
 #Any other choice other than 1,2,3 is given this output
 
 esac
